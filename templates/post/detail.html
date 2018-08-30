@@ -1,0 +1,259 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coinoscen - {{question.title}}</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="区块链问答社区,比特币,EOS,ETH交流" />  <meta name="description" content="CoinOcean是国内首个利用人工智能翻译共享区块链知识的网站，这里可以与全世界的区块链爱好者一起交流技术、思想和前沿的思>考,你可以找到关于比特币，EOS币，以太坊的相关问题 " />
+  <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+<style>
+#question-header{clear:both;margin-bottom:1em;border-bottom:1px solid #e4e6e8}#question-header h1{margin-bottom:.5em}#question-header .question-hyperlink{font-size:24px;line-height:1.35;font-weight:normal;margin-bottom:.5em;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif}#question-header .-main-cta{padding-left:20px}#question-header .-main-cta .btn{white-space:nowrap}
+code{font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;background-color:#eff0f1}pre{margin-bottom:1em;padding:5px;padding-bottom:20px!ie7;width:auto;width:650px!ie7;max-height:600px;overflow:auto;font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;font-size:13px;background-color:#eff0f1}</style>
+</head>
+<body>
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a href = "/" class="item"><i class="home icon"></i> Home </a>
+    <a href = "/btc/" class="item"><i class="btc icon">BTC</i></a>
+    <a href = "/eth/" class="item"><i class="ethereum icon">ETH</i></a>
+    <a href="/eos/" class="item"><i class="mail icon"></i>Eos </a>
+
+    <div class="ui simple dropdown item">价格<i class="dropdown icon"></i>
+      <div class="menu">
+        <a href="/price/btc/" class="item"><i class="btc icon"></i> 比特币</a>
+      </div>
+    </div>
+    <div class="right item"><div class="ui search"><div class="ui left icon input">
+    <input class="prompt" type="text" placeholder="Search GitHub"><i class="github icon"></i>
+  </div>
+</div>&#12288;
+<div class="ui buttons">
+  <button class="ui button">Cancel</button>
+  <div class="or"></div>
+  <button class="ui positive button">Save</button>
+</div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class="main ui container">
+<div class="ui segment">
+		  <div class="ui left dividing rail">
+ 		    <div class="ui segment">
+			<div class="ui secondary vertical pointing menu">
+			  <a href="/" class="active item">
+			    Btc Home
+			  </a>
+ 			 <a class="item">
+ 			    标签
+			  </a>
+			  <a class="item">
+			   用户
+			  </a>
+			</div>
+   		   </div>
+ 		 </div>
+		  <div class="ui right dividing rail">
+		    <div class="ui segment">
+ 			   <div class="ui small header"><p>原数据</p></div>
+ 			   日期:{{question.origindate}}<br>
+  			   访问次数:{{question.viewcount}}<br>
+ 			   Score:{{question.score}}<br>
+   		   </div>
+
+		    <div class="ui segment">
+			        <div class="ui small header"><p>推荐</p></div>
+                                <div class="ui list">
+                                  {% for question in re_posts %}
+                                  <a href="/detail/{{question.id}}/" class="item">{{question.title}}</a>
+                                 {% endfor %}
+                                </div>
+                        
+                    </div>
+
+		  </div>
+
+                 <div id="question-header">
+	            <h1 itemprop="name"><a href="/detail/{{question.id}}/" class="question-hyperlink">{{question.title}}</a></h1>
+		 </div>
+		<div class="ui grid">
+		<div class="two wide column">
+  		  <div class="ui vertical divider">
+      		  <a class="ui blue circular label">{{question.score}}</a>
+ 		   </div>
+		</div>
+
+		<div class="fourteen wide column">
+                  <div class="postcell post-layout--right">
+                    <div class="post-text" itemprop="text">
+                       {{question.content|safe}}
+                    </div>
+			<br><br>
+			{% if tags %}
+ 			   {% for tag in tags %}
+			       <a class="ui tag label">{{tag}}</a>
+    			   {% endfor %}
+			{% endif %}<br><br>
+                           
+			<a class="ui yellow image label">
+			  <img src="/images/avatar/small/christian.jpg">
+  				Helen
+ 			 <div class="detail">Co-worker</div>
+			</a>
+		</div></div>
+		   <div class="ui horizontal divider">
+			{{question.answercount}}个回答
+  	            </div>
+
+                  <div class="answercell post-layout--right">
+		    <div class="post-text" itemprop="text">
+                        {% if answers %}
+                            {% for answer in answers %}
+<div class="ui grid">
+<div class="two wide column">
+    <div class="ui vertical divider">
+        <a class="ui blue circular label">{{answer.score}}</a>
+    </div>
+</div>
+
+<div class="fourteen wide column">
+                                {{answer.content|safe}}
+                     <div class="ui right floated yellow image label">
+                          <img src="/images/avatar/small/christian.jpg">
+                                Helen
+                         <div class="detail">Co-worker</div>
+                     </div>
+
+</div></div>  <br><hr>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                 </div>
+                 </div>
+
+                  <div id="editor">
+                      <p>回答</p>
+                   </div>
+</div> 
+</div> 
+
+
+<div class="ui  vertical footer segment">
+  <div class="ui center aligned container">
+    <div class="ui stackable grid">
+      <div class="three wide column">
+        <h4 class="ui header">CoinOcean</h4>
+        <div class="ui link list">
+          <a class="item" href="/" target="_blank">比特币</a>
+          <a class="item" href="/eth/" target="_blank">以太币</a>
+          <a class="item" href="/eos/" target="_blank">EOS币</a>
+          <a class="item" href="/" target="_blank">加入讨论</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui header">关于我们</h4>
+        <div class="ui link list">
+          <a class="item" href="/license/" target="_blank">知识共享协议</a>
+        </div>
+      </div>
+      <div class="seven wide right floated column">
+        <h4 class="ui header">联系我们</h4>
+        <div class="ui link list">
+          <a class="item" href="/" target="_blank">商务合作</a>
+          <a class="item" href="/" target="_blank">反馈</a>
+          <a class="item" href="/" target="_blank">社区</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+$('.ui.search')
+  .search({
+    type          : 'category',
+    minCharacters : 3,
+    apiSettings   : {
+      onResponse: function(githubResponse) {
+        var
+          response = {
+            results : {}
+          }
+        ;
+        // translate GitHub API response to work with search
+        $.each(githubResponse.items, function(index, item) {
+          var
+            language   = item.language || 'Unknown',
+            maxResults = 8
+          ;
+          if(index >= maxResults) {
+            return false;
+          }
+          // create new language category
+          if(response.results[language] === undefined) {
+            response.results[language] = {
+              name    : language,
+              results : []
+            };
+          }
+          // add result to category
+          response.results[language].results.push({
+            title       : item.name,
+            description : item.description,
+            url         : item.html_url
+          });
+        });
+        return response;
+      },
+      url: '//api.github.com/search/repositories?q={query}'
+    }
+  })
+;
+        });
+    </script>
+<script src="/static/semantic/semantic.min.js"></script>
+<script type="text/javascript" src="/static/editor/release/wangEditor.min.js"></script>
+<script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E('#editor')
+        editor.customConfig.menus = [
+        'head',
+        'bold',
+        'italic',
+        'underline'
+    ]
+        editor.create()
+    </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104620874-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104620874-2');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</body>
+</html>

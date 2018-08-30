@@ -1,0 +1,113 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/semantic/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/stacks.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/primary.css">
+</head>
+
+<body>
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a href="/" class="item">
+      <i class="home icon"></i> Home
+    </a>
+    <a class="item">
+      <i class="grid layout icon"></i> Browse
+    </a>
+    <a class="item">
+      <i class="mail icon"></i> Messages
+    </a>
+    <div class="ui simple dropdown item">
+      More
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a href="/create" class="item"><i class="edit icon"></i> Edit Profile</a>
+        <a class="item"><i class="globe icon"></i> Choose Language</a>
+        <a class="item"><i class="settings icon"></i> Account Settings</a>
+      </div>
+    </div>
+
+    <div class="right item">
+<div class="ui search">
+  <div class="ui left icon input">
+    <input class="prompt" type="text" placeholder="Search GitHub">
+    <i class="github icon"></i>
+  </div>
+</div>&#12288;
+
+<div class="ui buttons">
+  <button class="ui button">Cancel</button>
+  <div class="or"></div>
+  <button class="ui positive button">Save</button>
+</div>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+<br><br><br>
+<div class="ui text container">
+<div class="ui sizer vertical segment">
+  <div class="ui medium header">{{question.title}}</div>
+<div class="postcell post-layout--right">
+    <div class="post-text" itemprop="text">
+  {{question.content|safe}} 
+</div></div>
+</div>
+
+
+</div>
+<script type="text/javascript">
+        $(document).ready(function() {
+$('.ui.search')
+  .search({
+    type          : 'category',
+    minCharacters : 3,
+    apiSettings   : {
+      onResponse: function(githubResponse) {
+        var
+          response = {
+            results : {}
+          }
+        ;
+        // translate GitHub API response to work with search
+        $.each(githubResponse.items, function(index, item) {
+          var
+            language   = item.language || 'Unknown',
+            maxResults = 8
+          ;
+          if(index >= maxResults) {
+            return false;
+          }
+          // create new language category
+          if(response.results[language] === undefined) {
+            response.results[language] = {
+              name    : language,
+              results : []
+            };
+          }
+          // add result to category
+          response.results[language].results.push({
+            title       : item.name,
+            description : item.description,
+            url         : item.html_url
+          });
+        });
+        return response;
+      },
+      url: '//api.github.com/search/repositories?q={query}'
+    }
+  })
+;
+        });
+    </script>
+<script src="/static/semantic/semantic.min.js"></script>
+
+</body>
+</html>
